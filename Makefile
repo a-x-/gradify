@@ -1,3 +1,3 @@
 .PHONY install
 install
-	pip install Pillow
+	sudo pip install Pillow
