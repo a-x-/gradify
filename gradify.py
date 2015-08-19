@@ -13,7 +13,7 @@ class Gradify():
   """
   
   # Cross browser prefixes.
-  BROWSER_PREFIXES = ["", "-webkit-", "-moz-", "-o-", "-ms-"]
+  BROWSER_PREFIXES = ["-webkit-", "-moz-", "-o-", "-ms-", ""]
 
   # Demo browser execution
   DEMO_CMD = {
@@ -35,8 +35,8 @@ class Gradify():
 
     self.num_done = 0
 
-    if webkit_only:
-      self.BROWSER_PREFIXES= ["-webkit-"]
+    if self.args.webkit_only or webkit_only:
+      self.BROWSER_PREFIXES= ["-webkit-", ""]
 
     self.IGNORED_COLORS = {
       "BLACK": {
@@ -76,6 +76,7 @@ class Gradify():
     self.parser.add_argument("-f", "--file", help="Gradify single file")
     self.parser.add_argument("-c", "--classname", help="Specific classname of CSS to add gradients to (default is 'gradify')")
     self.parser.add_argument("--demo", help="Create example HTML file displaying results, opens when completed", action="store_true")
+    self.parser.add_argument("--webkit-only", help="Generate css for webkit only", action="store_true")
     self.args = self.parser.parse_args()
     return
 
