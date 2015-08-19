@@ -34,6 +34,8 @@ class Gradify():
     self.pairs = []
 
     self.num_done = 0
+    
+    self.indent = '    '
 
     if webkit_only:
       self.BROWSER_PREFIXES= ["-webkit-"]
@@ -49,6 +51,9 @@ class Gradify():
       }
     }
     self.init_CLI_args()
+    
+    if not self.args.human_readable
+      self.indent = ''
     
     if self.args.demo:
       self.demo_file = "demo.html"
@@ -76,6 +81,7 @@ class Gradify():
     self.parser.add_argument("-f", "--file", help="Gradify single file")
     self.parser.add_argument("-c", "--classname", help="Specific classname of CSS to add gradients to (default is 'gradify')")
     self.parser.add_argument("--demo", help="Create example HTML file displaying results, opens when completed", action="store_true")
+    self.parser.add_argument("--human-readable", help="Cook human readable css", action="store_true")
     self.args = self.parser.parse_args()
     return
 
@@ -174,16 +180,16 @@ class Gradify():
         print(".%s-%d {" % (self.args.classname, pair[0]))
       else:
         print(".gradify-%d {" % (pair[0]))
-      print("background:")
+      print(self.indent + "background:")
       if self.args.single:
         print "rgb(" + str(pair[1][0])+"," + str(pair[1][1]) +"," + str(pair[1][2]) +");"
       else:
         print "rgb(" + str(pair[1][0][0])+"," + str(pair[1][0][1]) +"," + str(pair[1][0][2]) +");"
       if not self.args.single:
-        print("background:")
+        print(self.indent + "background:")
         for prefix in self.BROWSER_PREFIXES:
           for color in pair[1]:
-            print prefix + "linear-gradient("+str(color[3])+"deg, rgba(" + str(color[0])+"," + str(color[1]) +"," + str(color[2]) +","+str(1)+") 0%, rgba(" + str(color[0])+"," + str(color[1]) +"," + str(color[2]) +",0) 100%)"
+            print self.indent + self.indent + prefix + "linear-gradient("+str(color[3])+"deg, rgba(" + str(color[0])+"," + str(color[1]) +"," + str(color[2]) +","+str(1)+") 0%, rgba(" + str(color[0])+"," + str(color[1]) +"," + str(color[2]) +",0) 100%)"
             i += 1
             if i==self.MAX_COLORS:
               print ";"
