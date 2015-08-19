@@ -1,4 +1,4 @@
-var Grad = function(image, classname, optNumColors) {
+var Grad = function(image, classname, optNumColors, browserPrexies) {
 
   this.imageData = this.toImageData(image);
   
@@ -18,7 +18,7 @@ var Grad = function(image, classname, optNumColors) {
   this.classname = classname;
 
   // Prefixes for grad rules (cross-browser).
-  this.browserPrexies = ["","-webkit-", "-moz-", "-o-", "-ms-"]
+  this.browserPrexies = browserPrexies && browserPrexies.split(',').concat(['']) || ["-webkit-", "-moz-", "-o-", "-ms-", ""]
 
   // Safari being difficult and requiring special CSS rules
   this.directionMap = {
