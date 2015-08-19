@@ -35,6 +35,8 @@ class Gradify():
 
     self.num_done = 0
 
+    self.init_CLI_args()
+
     if self.args.webkit_only or webkit_only:
       self.BROWSER_PREFIXES= ["-webkit-", ""]
 
@@ -48,7 +50,6 @@ class Gradify():
         "radius": white_sensitivity
       }
     }
-    self.init_CLI_args()
     
     if self.args.demo:
       self.demo_file = "demo.html"
