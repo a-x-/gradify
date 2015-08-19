@@ -52,7 +52,7 @@ class Gradify():
     }
     self.init_CLI_args()
     
-    if not self.args.human_readable
+    if not self.args.human_readable:
       self.indent = ''
     
     if self.args.demo:
@@ -186,7 +186,7 @@ class Gradify():
       else:
         print "rgb(" + str(pair[1][0][0])+"," + str(pair[1][0][1]) +"," + str(pair[1][0][2]) +");"
       if not self.args.single:
-        print(self.indent + "background:")
+        print(self.indent + "background:\n")
         for prefix in self.BROWSER_PREFIXES:
           for color in pair[1]:
             print self.indent + self.indent + prefix + "linear-gradient("+str(color[3])+"deg, rgba(" + str(color[0])+"," + str(color[1]) +"," + str(color[2]) +","+str(1)+") 0%, rgba(" + str(color[0])+"," + str(color[1]) +"," + str(color[2]) +",0) 100%)"
